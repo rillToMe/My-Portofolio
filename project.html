@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Projects</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav>
+    <a href="index.html">🏠 Home</a>
+    <a href="index.html#about">👤 About</a>
+    <a href="#projects">🛠 Projects</a>
+    <a href="index.html#contact">📫 Contact</a>
+    <a href="sertifikat.html">Sertifikat</a>
+  </nav>
+
+  <header>
+    <h1>🛠 My Projects</h1>
+    <p>belum punya project tetap!</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>🌌 Body Tracking</h2>
+      <p>Tracking Body With Python.</p>
+      <a href="https://github.com/rillToMe/Body_Tracking" class="btn">View Project</a>
+    </section>
+
+    <section class="card">
+      <h2>🎮 Cooming Soon</h2>
+      <p>Waiting For... 🔥</p>
+      <a href="#" class="btn">View Project</a>
+    </section>
+
+    <section class="card">
+      <h2>📱 Cooming Soon</h2>
+      <p>Waiting For... 😼</p>
+      <a href="#" class="btn">View Project</a>
+    </section>
+  </main>
+
+<a href="music_player.html" target="_blank" class="btn-music">🎧 Music Mode</a>
+
+<p id="now-playing">
+  Now Playing: <span id="track-name">-</span>
+</p>
+
+
+<iframe 
+  src="music_player.html"
+  style="position: fixed; bottom: 0; right: 0; width: 100px; height: 100px; border: none; z-index: 9999;"
+  allow="autoplay"
+></iframe>
+
+<script>
+  let typingInterval;
+
+  function typeText(element, text, delay = 60) {
+    clearInterval(typingInterval);
+    element.textContent = '';
+    let i = 0;
+    typingInterval = setInterval(() => {
+      element.textContent += text.charAt(i);
+      i++;
+      if (i >= text.length) clearInterval(typingInterval);
+    }, delay);
+  }
+
+  window.addEventListener("message", (event) => {
+    if (event.data.type === "updateNowPlaying") {
+      const trackNameEl = document.getElementById("track-name");
+      const trackName = event.data.track;
+
+      typeText(trackNameEl, trackName, 60);
+    }
+  });
+</script>
+
+  <footer>
+    <p>&copy; 2025 Rahmat Aditya - All Rights Reserved.</p>
+  </footer>
+</body>
+</html>

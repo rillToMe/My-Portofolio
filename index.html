@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rahmat Aditya - Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@3.3.0/tsparticles.bundle.min.js"></script>
+
+</head>
+<body>
+    <div id="tsparticles"></div>
+  <header>
+    <h1>Welcome To My Portofolio</h1>
+    <h1><span class="typing-multi"></span><span class="cursor">|</span></h1>
+    <p class="tagline">👾 Just a Gen Z trying to code the world 💻</p>
+  </header>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="project.html">Projects</a>
+    <a href="sertifikat.html">Sertifikat</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    
+  </nav>
+
+  <div class="profile-box">
+  <img src="pp2.png" alt="Foto Rahmat Aditya" class="profile-img" />
+
+</div>
+  <main>
+    <section id="home">
+        <div class="card">
+      <h2>Home</h2>
+      <h3>Halo! Saya Rahmat Aditya 👋</h3>
+        <p>
+            Seorang pelajar yang sedang semangat belajar <strong>pengembangan web</strong>, terutama bagian <strong>front-end</strong>. 
+            Saya suka ngoding sambil dengerin musik chill, dan suka ngeulangin waktu untuk mendesain UI yang keren.
+        </p>
+        <p>
+            Web ini adalah tempat saya buat nunjukin skill, eksperimen ide..😅.
+        </p>
+      </div>
+    </section>
+
+    <section id="about">
+        <div class="card">
+      <h2>About</h2>
+        <p>
+            Nama saya Rahmat, saya adakh seorang pelajar yang sedang belajar membuat website dari nol. 
+            Fokus utama saya sekarang masih di <strong>HTML</strong> & <strong>CSS</strong>, tapi saja juga pelan-pelan belajar <strong>JavaScript</strong>.
+        </p>
+        <p>
+            Selain ngoding, saya juga suka main game, nonton anime, dan bikin playlist lo-fi buat nemenin coding tengah malem 😴.
+        </p>
+        <p>
+            Target saya? Bisa bikin website yang keren, dan bisa menghasilkan cuan, tapi saya tidak cuma ingin berhasil di web, tapi juga dari dulu 
+            saya sangat menyukai membuat project <strong>Game</strong>, walau belum jadi sampai sekarang.
+        </p>
+        <p>
+        <em>Moto hidup: “Ngoding sambil healing, error langsung turu.”</em>
+        </p>
+      <img src="AlyaChannn.jpg" alt="about image" />
+      </div>
+    </section>
+
+    <section id="contact">
+        <div class="card">
+      <h2>Contact</h2>
+        <ul class="contact-list">
+            <li><i class="fas fa-envelope"></i> rahmataditya2817@gmail.com</li>
+            <li><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/rill_lyrics/" target="_blank">@rill_lyrics</a></li>
+            <li><i class="fab fa-tiktok"></i> <a href="https://www.tiktok.com/@goodvibes_music28" target="_blank">@goodvibes_music28</a></li>
+            <li><i class="fa fa-phone"></i> <a href="082286523626" target="_blank">082286523626</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+
+</body>
+
+<audio id="keySound" src="typig.wav" preload="auto"></audio>
+<audio id="bg-music" autoplay></audio>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const texts = ["Gamers", "GameDev", "Wibu", "AlyaHusband"];
+    let count = 0;
+    let index = 0;
+    let currentText = '';
+    let letter = '';
+    const typingElement = document.querySelector(".typing-multi");
+    const keySound = document.getElementById("keySound");
+
+    function playSound() {
+      keySound.currentTime = 0;
+      keySound.play();
+    }
+
+    function type() {
+      if (count === texts.length) {
+        count = 0;
+      }
+
+      currentText = texts[count];
+      letter = currentText.slice(0, ++index);
+
+      typingElement.textContent = letter;
+      playSound();
+
+      if (letter.length === currentText.length) {
+        setTimeout(erase, 1500);
+      } else {
+        setTimeout(type, 100);
+      }
+    }
+
+    function erase() {
+      letter = currentText.slice(0, --index);
+      typingElement.textContent = letter;
+      playSound();
+
+      if (letter.length === 0) {
+        count++;
+        setTimeout(type, 300);
+      } else {
+        setTimeout(erase, 50);
+      }
+    }
+
+    type();
+  });
+</script>
+
+
+
+<a href="music_player.html" target="_blank" class="btn-music">🎧 Music Mode</a>
+<p id="now-playing">
+  Now Playing: <span id="track-name">-</span>
+</p>
+
+
+
+<iframe 
+  src="music_player.html"
+  style="position: fixed; bottom: 0; right: 0; width: 100px; height: 100px; border: none; z-index: 9999;"
+  allow="autoplay"
+></iframe>
+
+<script>
+  let typingInterval;
+
+  function typeText(element, text, delay = 60) {
+    clearInterval(typingInterval);
+    element.textContent = '';
+    let i = 0;
+    typingInterval = setInterval(() => {
+      element.textContent += text.charAt(i);
+      i++;
+      if (i >= text.length) clearInterval(typingInterval);
+    }, delay);
+  }
+
+  window.addEventListener("message", (event) => {
+    if (event.data.type === "updateNowPlaying") {
+      const trackNameEl = document.getElementById("track-name");
+      const trackName = event.data.track;
+
+      typeText(trackNameEl, trackName, 60);
+    }
+  });
+</script>
+
+
+
+<footer>
+    <p>&copy; 2025 Rahmat Aditya - All Rights Reserved.</p>
+  </footer>
+</html>
