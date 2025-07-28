@@ -56,6 +56,17 @@
   <source src="music/waiting_sound.mp3" type="audio/mp3">
   Your browser does not support the audio element.
 </audio>
+
+  <audio id="bg-meme" src="music/waiting_sound.mp3" loop></audio>
+
+<script>
+  const bgAudio = document.getElementById("bg-meme");
+
+  window.addEventListener("click", () => {
+    bgAudio.play().catch(err => console.log("Audio blocked: ", err));
+  }, { once: true });
+</script>
+<p class="tap-msg">👆 Tap anywhere to unlock meme vibes 🔊</p>
   <a href="index.html" class="back-btn">⏪ Back to Portfolio</a>
 </body>
 </html>
