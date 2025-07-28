@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Still Waiting...</title>
-  <link rel="icon" type="image/x-icon" href="item/img/porto.png">
   <style>
     body {
       background-color: #0f0f0f;
@@ -43,42 +42,56 @@
       background-color: #5ce1e6;
       color: #000;
     }
-    .tap-msg {
+
+    .audio-trigger {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      font-size: 1rem;
-      margin-top: 1rem;
-      color: #ccc;
+      padding: 2rem;
+      cursor: pointer;
       animation: blink 1s infinite;
     }
 
-     @keyframes blink {
-     0%, 100% { opacity: 0.5; }
-     50% { opacity: 1; }
+    @keyframes blink {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
     }
   </style>
 </head>
 <body>
   <h1>🎮 Project Coming Soon... Meanwhile, Enjoy This:</h1>
+
   <video autoplay loop muted playsinline>
     <source src="item/video/mr_bean.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
 
-  <audio autoplay loop>
-  <source src="music/waiting_sound.mp3" type="audio/mp3">
-  Your browser does not support the audio element.
-</audio>
-
   <audio id="bg-meme" src="music/waiting_sound.mp3" loop></audio>
 
-<script>
-  const bgAudio = document.getElementById("bg-meme");
+  <div id="audio-trigger" class="audio-trigger">
+    👆 Tap for meme juice!
+  </div>
 
-  window.addEventListener("click", () => {
-    bgAudio.play().catch(err => console.log("Audio blocked: ", err));
-  }, { once: true });
-</script>
-<p class="tap-msg">👆 Tap anywhere to unlock meme vibes 🔊</p>
   <a href="index.html" class="back-btn">⏪ Back to Portfolio</a>
+
+  <script>
+    const bgAudio = document.getElementById("bg-meme");
+    const trigger = document.getElementById("audio-trigger");
+
+    trigger.addEventListener("click", () => {
+      bgAudio.play().then(() => {
+        trigger.style.display = "none";
+      }).catch(err => {
+        console.log("Playback error:", err);
+      });
+    });
+  </script>
 </body>
 </html>
