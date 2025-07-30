@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kotak Saran</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    
+  </style>
+</head>
+<body>
+
+  <div class="saran-container">
+    <form class="suggestion-form">
+      <h2>💬 Kotak Saran</h2>
+      <input type="text" name="nama" placeholder="Nama kamu" required />
+      <input type="email" name="email" placeholder="Email kamu" required />
+      <input type="text" name="telepon" placeholder="Nomor telepon (opsional)" />
+      <textarea name="pesan" placeholder="Tulis saran kamu di sini..." required></textarea>
+      <button class="btn-submit" type="submit">Kirim Saran</button>
+      <a href="index.html" class="back-btn">⏪ Kembali ke Home</a>
+    </form>
+  </div>
+
+    <div id="popup-notif" class="popup-hidden">
+        💌 Thanks untuk sarannya!
+    </div>
+
+
+    <div id="video-overlay" class="video-overlay"></div>
+
+    <video id="good-job-video" preload="auto" class="hidden-video">
+        <source src="item/video/good_job.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    
+<script>
+const form = document.querySelector(".suggestion-form");
+const popup = document.getElementById("popup-notif");
+const videoOverlay = document.getElementById("video-overlay");
+const goodJobVid = document.getElementById("good-job-video");
+
+
+const scriptURL = "https://script.google.com/macros/s/AKfycbxr0q04H_f9u8-MOgwXcLJ-0EYfsP02gHnmyYtGJuRyXX2mMNmJkyVYEw-xeiKXbZFl/exec";
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const data = {
+  nama: form.querySelector("input[name='nama']").value,
+  email: form.querySelector("input[name='email']").value,
+  telepon: form.querySelector("input[name='telepon']").value,
+  pesan: form.querySelector("textarea[name='pesan']").value,
+  };
+
+  try {
+    await fetch(scriptURL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    videoOverlay.classList.add("show");
+    goodJobVid.style.display = "block";
+    goodJobVid.play().then(() => popup.classList.add("popup-visible"));
+
+    goodJobVid.onended = () => {
+      popup.classList.remove("popup-visible");
+      goodJobVid.style.display = "none";
+      videoOverlay.classList.remove("show");
+    };
+
+    form.reset();
+  } catch (err) {
+    console.log("DEBUG ERROR: ", err);
+    alert("⚠️ Gagal mengirim saran, coba lagi ya!");
+  }
+});
+</script>
+
+</body>
+</html>
