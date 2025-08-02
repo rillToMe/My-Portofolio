@@ -9,7 +9,7 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
 
-  const googleScriptUrl = "https://script.google.com/macros/s/AKfycbwozHkWdzn0Ylo34UCgifjjBr-N6_9kc-vV-NY5R9Ld28x0OTLNy1WmYWLC9pWq8RgOzQ/exec";
+  const googleScriptUrl = "https://script.google.com/macros/s/AKfycbzQj9AVLlMVAH5LcF8br29Y_O0VaAP1sc7IoFOPGHyx3fd_Bhl2jdQQVMwZKqkKxHeO7g/exec";
 
   try {
     if (req.method === "POST") {
@@ -34,5 +34,6 @@ export default async function handler(req, res) {
     res.status(500).json({ success: false, error: error.toString() });
   }
 }
+
 
 
