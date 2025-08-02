@@ -5,7 +5,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const googleScriptUrl = "https://script.google.com/macros/s/AKfycbzG9hVyGZVBeh0QvU5FaL6ukqB8ssHEFxOkWdD0RzJebyaifykGa1noQvplDcabOwTUiw/exec";
+    const googleScriptUrl = "https://script.google.com/macros/s/AKfycbxc9070uwJVp0FJKI8u_brBHV5Xrz_yvJv3pJplnD6svQLPtZCR0dFn8GPli1DkRFkEmw/exec";
 
     const response = await fetch(googleScriptUrl, {
       method: "POST",
@@ -26,4 +26,5 @@ export default async function handler(req, res) {
     return res.status(500).json({ success: false, error: error.toString() });
   }
 }
+
 
