@@ -429,7 +429,7 @@ a:hover::after {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 300px; /* atau 60vw biar responsive */
+  width: 300px;
   border-radius: 16px;
   box-shadow: 0 0 30px rgba(255, 92, 138, 0.5);
   background-color: #000;
@@ -460,3 +460,4 @@ a:hover::after {
   visibility: visible;
   opacity: 1;
 }
+
